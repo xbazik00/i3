@@ -1,0 +1,79 @@
+#order += "spotify"
+#order += "imap"
+
+order += "weather_yahoo"
+order += "wifi"
+order += "disk /"
+order += "keyboard_layout"
+order += "battery_level"
+order += "volume master"
+order += "time"
+
+
+general {
+    interval = 1
+}
+
+weather_yahoo {
+    woeid = 786869
+    format_today = "Now: {icon}{temp}°{units}"
+    forecast_days = 5
+}
+
+wifi {
+    color_good = "#008080"
+    color_bad = "#960018"
+    blocks = ""
+    format_up = "{icon}{signal_percent}"	
+}
+
+keyboard_layout {
+    on_click 1 = "exec /home/abdi/.i3/switch.sh"
+    cache_timeout = 0
+}
+
+battery_level {
+    blocks = ""   
+    format = "{icon}{percent}\%"
+}
+
+spotify {
+    format = "{title} at {time}"
+    format_down = "no Spotify"
+    cache_timeout = 0
+}
+
+time {
+    format = ": %a %d %b : %H⦂%M⦂%S" 
+    on_click 1 = "exec zenity --calendar"
+}
+
+volume master {
+    format = ": %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+    on_click 1 = "exec pavucontrol"
+    on_click 2 = "exec amixer set Master toggle"
+    on_click 3 = "exec killall alsamixer"
+    on_click 4 = "exec amixer set Master 5%+; killall -s USR1 py3status"
+    on_click 5 = "exec amixer set Master 5%-; killall -s USR1 py3status"
+}
+
+
+disk "/" {
+    format = ": %free"
+    on_click 1 = "exec urxvt -e ranger"
+}
+
+
+mpdstatus {
+    format = ": [[%artist% - ]%title%]]"
+    color = true
+    color_play = "#CED5D0"
+    color_pause = "#CED5D0"
+    cache_timeout = 0
+    on_click 1 = "exec mpc toggle"
+    #on_click 3 = "exec mpc prev"
+}
+ 
